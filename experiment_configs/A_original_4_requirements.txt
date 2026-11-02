@@ -1,0 +1,31 @@
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+description Guest Network
+ip address 192.168.20.1 255.255.255.0
+ip access-group GUEST_ACL in
+no shutdown
+exit
+
+interface GigabitEthernet0/1
+description Staff Network
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+interface GigabitEthernet0/2
+description Server Network
+ip address 10.0.0.1 255.255.255.0
+no shutdown
+exit
+
+ip access-list extended GUEST_ACL
+deny tcp host 192.168.20.10 host 10.0.0.10 eq 22
+deny tcp host 192.168.20.10 host 192.168.10.10 eq 22
+permit udp host 192.168.20.10 host 10.0.0.10 eq 53
+permit ip any any
+exit
+
+end
+write memory

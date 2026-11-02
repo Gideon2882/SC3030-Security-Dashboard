@@ -1,0 +1,23 @@
+! Illustrative example only — NOT an experimental LLM result.
+hostname R1
+interface GigabitEthernet0/0
+ description Guest subnet
+ ip address 192.168.20.1 255.255.255.0
+ ip access-group GUEST_IN in
+!
+interface GigabitEthernet0/1
+ description Staff subnet
+ ip address 192.168.10.1 255.255.255.0
+!
+interface GigabitEthernet0/2
+ description Server subnet
+ ip address 10.0.0.1 255.255.255.0
+!
+ip access-list extended GUEST_IN
+ remark Allow DNS from guest to server
+ permit udp 192.168.20.0 0.0.0.255 host 10.0.0.10 eq 53
+ remark Deny guest access to staff
+ deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+ remark MISTAKE: forgot to deny other guest traffic to server
+ permit ip any any
+!

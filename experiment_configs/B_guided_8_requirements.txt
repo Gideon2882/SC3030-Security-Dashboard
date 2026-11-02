@@ -1,0 +1,27 @@
+configure terminal
+!
+interface GigabitEthernet0/0
+ description Guest Network
+ ip address 192.168.20.1 255.255.255.0
+ ip access-group GUEST_POLICY in
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description Staff Network
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+!
+interface GigabitEthernet0/2
+ description Server Network
+ ip address 10.0.0.1 255.255.255.0
+ no shutdown
+!
+ip access-list extended GUEST_POLICY
+ deny tcp 192.168.20.0 0.0.0.255 host 10.0.0.10 eq 22
+ deny tcp 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255 eq 22
+ permit udp 192.168.20.0 0.0.0.255 host 10.0.0.10 eq 53
+ deny ip 192.168.20.0 0.0.0.255 host 10.0.0.10
+ permit ip any any
+!
+end
+write memory

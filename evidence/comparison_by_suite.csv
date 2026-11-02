@@ -1,0 +1,9 @@
+Configuration,File,Suite,Passed,Total,SecurityPassed,OperationalPassed,Overall
+Original A (4 requirements),A_original_4_requirements.txt,Original 4,4,4,2,2,PASS
+Original A (4 requirements),A_original_4_requirements.txt,Expanded 8,5,8,2,3,FAIL
+Original B (4 requirements),B_original_4_requirements.txt,Original 4,4,4,2,2,PASS
+Original B (4 requirements),B_original_4_requirements.txt,Expanded 8,5,8,2,3,FAIL
+New A (8 requirements),A_basic_8_requirements.txt,Original 4,4,4,2,2,PASS
+New A (8 requirements),A_basic_8_requirements.txt,Expanded 8,8,8,5,3,PASS
+New B (8 requirements),B_guided_8_requirements.txt,Original 4,4,4,2,2,PASS
+New B (8 requirements),B_guided_8_requirements.txt,Expanded 8,8,8,5,3,PASS
